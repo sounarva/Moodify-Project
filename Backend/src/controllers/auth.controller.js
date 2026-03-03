@@ -25,7 +25,7 @@ const registerController = async (req, res) => {
             return res.status(400)
                 .json({
                     success: false,
-                    message: "User already exists"
+                    message: "User already exists 🚫"
                 })
         }
 
@@ -50,7 +50,7 @@ const registerController = async (req, res) => {
         return res.status(201)
             .json({
                 success: true,
-                message: "User registered successfully",
+                message: "User registered successfully 🥳",
                 user: {
                     id: newUser._id,
                     name: newUser.username,
@@ -61,33 +61,28 @@ const registerController = async (req, res) => {
         return res.status(500)
             .json({
                 success: false,
-                message: "Internal server error"
+                message: "Internal server error 🚫"
             })
     }
 }
 
 const loginController = async (req, res) => {
     try {
-        const { username, email, password } = req.body
-        if ((!username && !email) || !password) {
-            return res.status(400)
-                .json({
-                    success: false,
-                    message: "Username/Email and Password are required"
-                })
-        }
+        const { username, email, password } = req.body;
+        const loginIdentifier = username || email;
 
         const user = await userModel.findOne({
             $or: [
-                { username },
-                { email }
+                { username: loginIdentifier },
+                { email: loginIdentifier }
             ]
-        }).select("+password")
+        }).select("+password");
+
         if (!user) {
             return res.status(400)
                 .json({
                     success: false,
-                    message: "Invalid credentials"
+                    message: "Invalid credentials 🚫"
                 })
         }
         const isValidPassword = await bcrypt.compare(password, user.password)
@@ -95,7 +90,7 @@ const loginController = async (req, res) => {
             return res.status(400)
                 .json({
                     success: false,
-                    message: "Invalid credentials"
+                    message: "Invalid credentials 🚫"
                 })
         }
 
@@ -124,7 +119,7 @@ const loginController = async (req, res) => {
         return res.status(500)
             .json({
                 success: false,
-                message: "Internal server error"
+                message: "Internal server error 🚫"
             })
     }
 }
@@ -137,20 +132,20 @@ const getMeController = async (req, res) => {
             return res.status(404)
                 .json({
                     success: false,
-                    message: "User not found"
+                    message: "User not found 🚫"
                 })
         }
         return res.status(200)
             .json({
                 success: true,
-                message: "User found successfully",
+                message: "User found successfully 🥳",
                 user
             })
     } catch (error) {
         return res.status(500)
             .json({
                 success: false,
-                message: "Internal server error"
+                message: "Internal server error 🚫"
             })
     }
 }
@@ -166,7 +161,7 @@ const logoutController = async (req, res) => {
                 })
         }
         // USED REDIS TO BLACKLIST THE TOKEN
-        await redisClient.set(token , Date.now() , "EX" , 3 * 24 * 60 * 60)
+        await redisClient.set(token, Date.now(), "EX", 3 * 24 * 60 * 60)
 
         res.clearCookie("token")
         return res.status(200)

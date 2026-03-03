@@ -1,21 +1,44 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
 import '../Styles/Register.scss';
+import useAuth from '../Hooks/useAuth';
+import Toaster from '../../../../Shared/Toaster';
 
 const Register = () => {
+    const { loading, register } = useAuth()
+    const navigate = useNavigate()
     const [showPassword, setShowPassword] = useState(false);
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    const handleRegister = (e) => {
+    const [toast, setToast] = useState(null);
+
+    const handleRegister = async (e) => {
         e.preventDefault()
-        console.log(username, email, password)
+        const result = await register({ username, email, password })
+        if (result?.success) {
+            setToast({ message: "Account created successfully ✅", type: "success" });
+        } else {
+            setToast({ message: result?.message || "Registration failed ❌", type: "error" });
+        }
     }
 
     return (
         <div className="register-container">
+            {toast && (
+                <div className="toaster-container">
+                    <Toaster
+                        message={toast.message}
+                        type={toast.type}
+                        onClose={() => {
+                            setToast(null);
+                            if (toast.type === "success") navigate("/");
+                        }}
+                    />
+                </div>
+            )}
             <div className="register-card">
                 <div className="register-left">
                     <div className="overlay">

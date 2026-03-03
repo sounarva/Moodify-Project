@@ -1,20 +1,43 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
 import { Eye, EyeOff } from 'lucide-react';
 import '../Styles/Login.scss';
+import useAuth from '../Hooks/useAuth';
+import Toaster from '../../../../Shared/Toaster';
 
 const Login = () => {
+  const { loading, login } = useAuth()
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
-  const [identifier, setIdentifier] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const [toast, setToast] = useState(null);
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    console.log("Login attempt:", identifier, password);
+    const result = await login({ username, password })
+    if (result?.success) {
+      setToast({ message: "Login successful ✅", type: "success" });
+    } else {
+      setToast({ message: result?.message || "Login failed ❌", type: "error" });
+    }
   };
 
   return (
     <div className="login-container">
+      {toast && (
+        <div className="toaster-container">
+          <Toaster
+            message={toast.message}
+            type={toast.type}
+            onClose={() => {
+              setToast(null);
+              if (toast.type === "success") navigate("/");
+            }}
+          />
+        </div>
+      )}
       <div className="login-card">
         <div className="login-left">
           <div className="login-header">
@@ -23,11 +46,11 @@ const Login = () => {
           </div>
           <form className="login-form" onSubmit={handleLogin}>
             <div className="input-group">
-              <label htmlFor="identifier">Username / Email ID</label>
+              <label htmlFor="username">Username / Email ID</label>
               <input
-                id="identifier"
-                value={identifier}
-                onChange={(e) => setIdentifier(e.target.value)}
+                id="username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
                 type="text"
                 placeholder="Username or email"
                 required
