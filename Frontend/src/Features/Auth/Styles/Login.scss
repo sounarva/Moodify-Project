@@ -1,0 +1,200 @@
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #0f1219;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+
+    .login-card {
+        display: flex;
+        width: 1000px;
+        height: 650px;
+        background-color: #1a1f2b;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.7);
+
+        .login-left {
+            width: 45%;
+            padding: 60px 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #ffffff;
+            color: #1e293b;
+
+            .login-header {
+                margin-bottom: 40px;
+
+                h2 {
+                    font-size: 2.5rem;
+                    font-weight: 800;
+                    margin-bottom: 8px;
+                    color: #1e293b;
+                    letter-spacing: -0.5px;
+                }
+
+                p {
+                    font-size: 1rem;
+                    color: #64748b;
+                    font-weight: 400;
+                }
+            }
+
+            .login-form {
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+
+                .input-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 8px;
+
+                    label {
+                        font-size: 0.9rem;
+                        font-weight: 600;
+                        color: #1e293b;
+                    }
+
+                    input {
+                        width: 100%;
+                        padding: 12px 14px;
+                        background-color: #ffffff;
+                        border: 1.5px solid #e2e8f0;
+                        border-radius: 8px;
+                        color: #1e293b;
+                        font-size: 0.95rem;
+                        transition: all 0.3s ease;
+                        outline: none;
+
+                        &:focus {
+                            border-color: #0f172a;
+                            box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1);
+                        }
+
+                        &::placeholder {
+                            color: #94a3b8;
+                        }
+                    }
+
+                    &.password-group {
+                        .input-with-icon {
+                            position: relative;
+                            display: flex;
+                            align-items: center;
+
+                            input {
+                                padding-right: 45px;
+                            }
+
+                            .toggle-password {
+                                position: absolute;
+                                right: 12px;
+                                background: none;
+                                border: none;
+                                padding: 0;
+                                color: #94a3b8;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                transition: color 0.3s ease;
+
+                                &:hover {
+                                    color: #1e293b;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .login-btn {
+                    margin-top: 10px;
+                    padding: 12px;
+                    background-color: #1C1C1C;
+                    color: #ffffff;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+
+                    &:hover {
+                        background-color: #333;
+                        transform: translateY(-2px);
+                    }
+
+                    &:active {
+                        transform: translateY(0);
+                    }
+                }
+            }
+
+            .register-prompt {
+                margin-top: 30px;
+                text-align: center;
+                font-size: 0.9rem;
+                color: #64748b;
+
+                a {
+                    color: #1e293b;
+                    font-weight: 600;
+                    text-decoration: none;
+                    border-bottom: 1.5px solid transparent;
+                    transition: border-color 0.3s;
+
+                    &:hover {
+                        border-color: #1e293b;
+                    }
+                }
+            }
+        }
+
+        .login-right {
+            flex: 1;
+            background-image: url('../../../Assets/login_bg_music.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 60px;
+
+            .overlay {
+                z-index: 2;
+                color: #ffffff;
+
+                h1 {
+                    font-size: 3.2rem;
+                    font-weight: 800;
+                    margin-bottom: 20px;
+                    line-height: 1.1;
+                    letter-spacing: -1px;
+                }
+
+                p {
+                    font-size: 1.2rem;
+                    opacity: 0.9;
+                    font-weight: 400;
+                    max-width: 400px;
+                    line-height: 1.6;
+                }
+            }
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(to top, rgba(15, 18, 25, 0.9) 0%, rgba(15, 18, 25, 0.4) 50%, rgba(15, 18, 25, 0.1) 100%);
+                z-index: 1;
+            }
+        }
+    }
+}
