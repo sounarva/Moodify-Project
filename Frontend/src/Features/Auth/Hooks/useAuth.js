@@ -34,18 +34,6 @@ const useAuth = () => {
         }
     }
 
-    const getMe = async () => {
-        try {
-            setLoading(true)
-            const response = await getMeAPI()
-            setUser(response.user)
-            setLoading(false)
-        } catch (error) {
-            console.log(error)
-            setLoading(false)
-        }
-    }
-
     const logout = async () => {
         try {
             setLoading(true)
@@ -60,16 +48,11 @@ const useAuth = () => {
         }
     }
 
-    useEffect(() => {
-        getMe()
-    }, [])
-
     return {
         user,
         loading,
         register,
         login,
-        getMe,
         logout
     }
 }
