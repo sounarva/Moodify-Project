@@ -24,6 +24,15 @@ export default function FaceExpression({ onClick = () => { } }) {
                     .getTracks()
                     .forEach((track) => track.stop());
             }
+
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach((track) => track.stop());
+                streamRef.current = null;
+            }
+
+            if (videoRef.current) {
+                videoRef.current.srcObject = null;
+            }
         };
     }, []);
 

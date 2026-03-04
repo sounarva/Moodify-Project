@@ -26,3 +26,8 @@ export const getMeAPI = async () => {
     const response = await baseAPI.get("/api/v1/auth/get-me")
     return response.data
 }
+
+export const logoutAPI = async () => {
+    const response = await baseAPI.get("/api/v1/auth/logout")
+    return response.data
+}

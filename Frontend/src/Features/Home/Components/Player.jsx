@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useSong } from '../Hooks/useSong';
 import { Play, Pause, RotateCcw, FastForward, Music } from 'lucide-react';
 import './player.scss';
+import Loading from '../../../../Shared/Loading';
 
 const Player = () => {
     const { playlist, currentSong, setCurrentSong, loading } = useSong();
@@ -31,7 +32,7 @@ const Player = () => {
         }
     }, [currentSong]);
 
-    if (loading) return <div className="player-loading">Loading songs...</div>;
+    if (loading) return <div className="player-loading"><Loading /></div>;
     if (!playlist || playlist.length === 0) return null;
 
     const togglePlay = () => {

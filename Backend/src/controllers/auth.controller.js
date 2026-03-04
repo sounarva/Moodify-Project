@@ -157,7 +157,7 @@ const logoutController = async (req, res) => {
             return res.status(401)
                 .json({
                     success: false,
-                    message: "Unauthorized user"
+                    message: "Unauthorized user 🚫"
                 })
         }
         // USED REDIS TO BLACKLIST THE TOKEN
@@ -166,12 +166,14 @@ const logoutController = async (req, res) => {
         res.clearCookie("token")
         return res.status(200)
             .json({
+                success: true,
                 message: "User logged out successfully ✅"
             })
     } catch (error) {
         return res.status(500)
             .json({
-                message: "Internal server error"
+                success: false,
+                message: "Internal server error 🚫"
             })
     }
 }
