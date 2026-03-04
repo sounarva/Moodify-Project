@@ -1,0 +1,48 @@
+.faceExpression-container {
+    width: 400px;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 2rem auto;
+
+    button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 10px 20px;
+        border-radius: 8px;
+        border: none;
+        background-color: #079634;
+        color: white;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        text-transform: capitalize;
+
+        &:hover {
+            background-color: #27ae52;
+        }
+    }
+
+    video {
+        width: 100%;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        padding: 0.4rem 0.5rem;
+        border: 0.1rem solid rgba(139, 136, 136, 0.237);
+        border-radius: 0.5rem;
+        font-size: 1.7rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+        background-color: rgba(74, 72, 72, 0.237);
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        backdrop-filter: blur(10px);
+    }
+}
