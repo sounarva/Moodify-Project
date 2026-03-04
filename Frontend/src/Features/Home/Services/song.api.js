@@ -1,6 +1,6 @@
 import axios from "axios";
 const songAPI = axios.create({
-    baseURL: "http://localhost:3000"
+    baseURL: ""
 })
 
 export const getSongAPI = async ({ mood }) => {

@@ -22,6 +22,7 @@ export const useSong = () => {
 
     return {
         playlist,
+        setPlaylist,
         currentSong,
         setCurrentSong,
         loading,

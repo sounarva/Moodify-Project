@@ -2,9 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { detect, init } from "../Utils/utils.js";
 import './faceExpression.scss'
 import { HatGlasses } from "lucide-react";
+import { useSong } from "../../Home/Hooks/useSong.js";
 
 
 export default function FaceExpression({ onClick = () => { } }) {
+    const { setPlaylist, setCurrentSong } = useSong()
     const videoRef = useRef(null);
     const landmarkerRef = useRef(null);
     const streamRef = useRef(null);
@@ -33,6 +35,8 @@ export default function FaceExpression({ onClick = () => { } }) {
             if (videoRef.current) {
                 videoRef.current.srcObject = null;
             }
+            setPlaylist([])
+            setCurrentSong(null)
         };
     }, []);
 
